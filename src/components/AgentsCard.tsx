@@ -1,6 +1,6 @@
 import React from "react";
 import { Agents } from "../hooks/useAgents";
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, Heading, Image, HStack } from "@chakra-ui/react";
 
 interface Props {
   agent: Agents;
@@ -12,6 +12,20 @@ const AgentsCard = ({ agent }: Props) => {
       <Image src={agent.fullPortrait} boxSize="200px" />
       <CardBody>
         <Heading fontSize="2xl">{agent.displayName}</Heading>
+        <HStack marginY={1}>
+          {agent.abilities.map((ability) => (
+            <Image
+              key={ability.displayName}
+              src={ability.displayIcon}
+              boxSize="25px"
+              mr={1}
+              style={{
+                filter:
+                  "brightness(0) saturate(100%) invert(82%) sepia(0%) saturate(7500%) hue-rotate(40deg) brightness(96%) contrast(98%)",
+              }}
+            />
+          ))}
+        </HStack>
       </CardBody>
     </Card>
   );

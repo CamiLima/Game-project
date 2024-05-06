@@ -2,11 +2,20 @@ import { useState, useEffect } from "react";
 import apiClient from "../services/api.client";
 import { CanceledError } from "axios";
 
+interface Ability {
+    displayIcon: string;
+    displayName: string;
+    slot: string;
+    description: string;
+}
+
  export interface Agents {
     uuid: string;
     displayName: string;
     background: string;
-    fullPortrait: string
+    fullPortrait: string;
+    abilities: Ability[];
+
   }
   
 interface FetchAgentsResponse {
