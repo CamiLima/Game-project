@@ -7,17 +7,21 @@ function App() {
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`, // 1024px
+        lg: `"nav nav" "main"`, // Alterando para duas linhas em ambos breakpoints
       }}
+      templateRows={{
+        base: "auto 1fr", // Definindo altura automática para nav e main
+        lg: "auto 1fr", // Definindo altura automática para nav e main
+      }}
+      h="100vh" // Definindo a altura do grid como 100% da altura da viewport
     >
       <GridItem area={"nav"}>
         <NavBar></NavBar>
       </GridItem>
-      <Show above="lg">
-        <GridItem area={"aside"}>Aside</GridItem>
-      </Show>
-      <GameGrid />
-      <GridItem area={"main"}>Main</GridItem>
+      <GridItem area={"main"} position="relative">
+        Main
+        <GameGrid />
+      </GridItem>
     </Grid>
   );
 }

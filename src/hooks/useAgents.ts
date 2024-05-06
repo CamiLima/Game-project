@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import apiClient from "../services/api.client";
 import { CanceledError } from "axios";
 
-interface Agents {
+ export interface Agents {
     uuid: string;
     displayName: string;
+    background: string;
+    fullPortrait: string
   }
   
-  interface FetchAgentsResponse {
+interface FetchAgentsResponse {
     count: number;
     data: Agents[];
   }
