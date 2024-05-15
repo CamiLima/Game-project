@@ -26,25 +26,30 @@ interface FetchAgentsResponse {
 const useAgents = () =>{
     const [agents, setAgents] = useState<Agents[]>([]);
     const [error, setError] = useState("");
+    const [isLoading, setLoading] = useState(false);
   
     useEffect(() => {
         const controller = new AbortController();
+
+        setLoading(true);
       apiClient
         .get<FetchAgentsResponse>("/agents", {signal: controller.signal})
         .then((res) => {
           const data = res.data.data;
   
           setAgents(data);
+          setLoading(false);
         })
         .catch((err) => {
             if(err instanceof CanceledError) return;
             setError(err.message)
+            setLoading(false);
         });
 
         return () => controller.abort();
     }, []);
 
-    return {agents, error}
+    return {agents, error, isLoading}
 }
 
 export default useAgents;

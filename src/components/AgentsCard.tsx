@@ -17,11 +17,10 @@ const AgentsCard = ({ agent }: Props) => {
             <Image
               key={ability.displayName}
               src={ability.displayIcon}
-              boxSize="25px"
+              boxSize="28px"
               mr={1}
               style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(82%) sepia(0%) saturate(7500%) hue-rotate(40deg) brightness(96%) contrast(98%)",
+                filter: "brightness(0.5)",
               }}
             />
           ))}
