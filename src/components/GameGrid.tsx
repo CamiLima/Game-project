@@ -2,6 +2,7 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import useAgents from "../hooks/useAgents";
 import AgentsCard from "./AgentsCard";
 import AgentsCardSkeleton from "./AgentsCardSkeleton";
+import AgentsCardContainer from "./AgentsCardContainer";
 
 const GameGrid = () => {
   const { agents, error, isLoading } = useAgents();
@@ -21,9 +22,15 @@ const GameGrid = () => {
         spacing={10}
       >
         {isLoading &&
-          skeletons.map((skeleton) => <AgentsCardSkeleton key={skeleton} />)}
+          skeletons.map((skeleton) => (
+            <AgentsCardContainer>
+              <AgentsCardSkeleton key={skeleton} />
+            </AgentsCardContainer>
+          ))}
         {filteredAgents.map((agent) => (
-          <AgentsCard key={agent.uuid} agent={agent} />
+          <AgentsCardContainer>
+            <AgentsCard key={agent.uuid} agent={agent} />
+          </AgentsCardContainer>
         ))}
       </SimpleGrid>
     </>

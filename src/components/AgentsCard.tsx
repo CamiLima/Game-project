@@ -8,7 +8,7 @@ interface Props {
 
 const AgentsCard = ({ agent }: Props) => {
   return (
-    <Card borderRadius={10} overflow="hidden" maxW="200px">
+    <Card>
       <Image src={agent.fullPortrait} boxSize="200px" />
       <CardBody>
         <Heading fontSize="2xl">{agent.displayName}</Heading>
