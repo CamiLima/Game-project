@@ -11,14 +11,9 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import AgentsClasses from "./components/AgentsClasses";
 import useAgents from "./hooks/useAgents";
+import { useState } from "react";
 
 function App() {
-  const { agents, error, isLoading } = useAgents();
-
-  const filteredAgents = agents.filter(
-    (agent) => agent.uuid !== "ded3520f-4264-bfed-162d-b080e2abccf9"
-  );
-
   return (
     <Grid
       templateAreas={{

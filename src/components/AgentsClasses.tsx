@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, Image, Text } from "@chakra-ui/react";
+import { List, ListItem, Image, Text, Button, HStack } from "@chakra-ui/react";
 
 interface DefaultValues {
   iconWidth: string;
@@ -20,7 +20,7 @@ interface DefaultValues {
 
 const defaultValues: DefaultValues = {
   iconWidth: "30px",
-  iconMarginRight: "5",
+  iconMarginRight: "2",
   imagePaths: {
     controllers:
       "https://media.valorant-api.com/agents/roles/4ee40330-ecdd-4f2f-98a8-eb1243428373/displayicon.png",
@@ -43,19 +43,28 @@ const AgentClassItem: React.FC<{ iconSrc: string; text: string }> = ({
   iconSrc,
   text,
 }) => (
-  <ListItem display="flex" alignItems="center">
-    <Image
-      src={iconSrc}
-      alt="Ícone"
-      boxSize={defaultValues.iconWidth}
-      mr={defaultValues.iconMarginRight}
-      style={{
-        filter: "brightness(0.5)",
-      }}
-    />
-    <Text fontSize="lg" flex="1">
-      {text}
-    </Text>
+  <ListItem display="flex" alignItems="left">
+    <HStack>
+      <Image
+        src={iconSrc}
+        alt="Ícone"
+        boxSize={defaultValues.iconWidth}
+        mr={defaultValues.iconMarginRight}
+        style={{
+          filter: "brightness(0.5)",
+        }}
+      />
+      <Button
+        onClick={() => console.log(text)}
+        variant="link"
+        flex="1"
+        fontSize="md"
+        whiteSpace="normal"
+        textAlign="left"
+      >
+        {text}
+      </Button>
+    </HStack>
   </ListItem>
 );
 

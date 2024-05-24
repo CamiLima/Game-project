@@ -23,13 +23,13 @@ const GameGrid = () => {
       >
         {isLoading &&
           skeletons.map((skeleton) => (
-            <AgentsCardContainer>
-              <AgentsCardSkeleton key={skeleton} />
+            <AgentsCardContainer key={skeleton}>
+              <AgentsCardSkeleton />
             </AgentsCardContainer>
           ))}
         {filteredAgents.map((agent) => (
-          <AgentsCardContainer>
-            <AgentsCard key={agent.uuid} agent={agent} />
+          <AgentsCardContainer key={agent.uuid}>
+            <AgentsCard agent={agent} />
           </AgentsCardContainer>
         ))}
       </SimpleGrid>
