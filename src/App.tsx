@@ -1,25 +1,44 @@
-import { Button, ButtonGroup, Grid, GridItem, Show } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Grid,
+  GridItem,
+  List,
+  ListItem,
+  Show,
+} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
+import AgentsClasses from "./components/AgentsClasses";
+import useAgents from "./hooks/useAgents";
 
 function App() {
+  const { agents, error, isLoading } = useAgents();
+
+  const filteredAgents = agents.filter(
+    (agent) => agent.uuid !== "ded3520f-4264-bfed-162d-b080e2abccf9"
+  );
+
   return (
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
-        lg: `"nav nav" "main"`, // Alterando para duas linhas em ambos breakpoints
+        lg: `"nav nav" "aside main"`,
       }}
-      templateRows={{
-        base: "auto 1fr", // Definindo altura automática para nav e main
-        lg: "auto 1fr", // Definindo altura automática para nav e main
+      templateColumns={{
+        base: "1fr",
+        lg: "250px 1fr",
       }}
-      h="100vh" // Definindo a altura do grid como 100% da altura da viewport
     >
-      <GridItem area={"nav"}>
-        <NavBar></NavBar>
+      <GridItem area="nav">
+        <NavBar />
       </GridItem>
-      <GridItem area={"main"} position="relative">
-        Main
+      <Show above="lg">
+        <GridItem area="aside" paddingX={5}>
+          <AgentsClasses />
+        </GridItem>
+      </Show>
+      <GridItem area="main">
         <GameGrid />
       </GridItem>
     </Grid>

@@ -9,12 +9,19 @@ interface Ability {
     description: string;
 }
 
+interface Role {
+  uuid: string;
+  displayName: string;
+  displayIcon: string;
+}
+
  export interface Agents {
     uuid: string;
     displayName: string;
     background: string;
     fullPortrait: string;
     abilities: Ability[];
+    role: Role[];
 
   }
   
