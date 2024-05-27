@@ -1,19 +1,12 @@
-import {
-  Button,
-  ButtonGroup,
-  Grid,
-  GridItem,
-  List,
-  ListItem,
-  Show,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import AgentsClasses from "./components/AgentsClasses";
-import useAgents from "./hooks/useAgents";
-import { useState } from "react";
 
 function App() {
+  const [selectedClass, setSelectedClass] = useState<string>("");
+
   return (
     <Grid
       templateAreas={{
@@ -30,11 +23,11 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <AgentsClasses />
+          <AgentsClasses onSelectClass={setSelectedClass} />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <GameGrid />
+        <GameGrid selectedClass={selectedClass} />
       </GridItem>
     </Grid>
   );

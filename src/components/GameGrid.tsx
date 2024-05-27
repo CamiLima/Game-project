@@ -1,14 +1,18 @@
+import React from "react";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import useAgents from "../hooks/useAgents";
 import AgentsCard from "./AgentsCard";
 import AgentsCardSkeleton from "./AgentsCardSkeleton";
 import AgentsCardContainer from "./AgentsCardContainer";
 
-const GameGrid = () => {
-  const { agents, error, isLoading } = useAgents();
-  const skeletons = [1, 2, 3, 4, 5, 6];
+interface GameGridProps {
+  selectedClass: string;
+}
 
-  // Filtrando os agentes para remover o Sova duplicado
+const GameGrid: React.FC<GameGridProps> = ({ selectedClass }) => {
+  const { agents, error, isLoading } = useAgents(selectedClass);
+
+  // Filter out the agents to remove the duplicate Sova
   const filteredAgents = agents.filter(
     (agent) => agent.uuid !== "ded3520f-4264-bfed-162d-b080e2abccf9"
   );
@@ -21,17 +25,19 @@ const GameGrid = () => {
         padding="10px"
         spacing={5}
       >
-        {isLoading &&
-          skeletons.map((skeleton) => (
-            <AgentsCardContainer key={skeleton}>
-              <AgentsCardSkeleton />
-            </AgentsCardContainer>
-          ))}
-        {filteredAgents.map((agent) => (
-          <AgentsCardContainer key={agent.uuid}>
-            <AgentsCard agent={agent} />
-          </AgentsCardContainer>
-        ))}
+        {isLoading
+          ? // Render skeletons while loading
+            Array.from({ length: 6 }).map((_, index) => (
+              <AgentsCardContainer key={index}>
+                <AgentsCardSkeleton />
+              </AgentsCardContainer>
+            ))
+          : // Render cards of filtered agents
+            filteredAgents.map((agent) => (
+              <AgentsCardContainer key={agent.uuid}>
+                <AgentsCard agent={agent} />
+              </AgentsCardContainer>
+            ))}
       </SimpleGrid>
     </>
   );
