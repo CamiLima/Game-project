@@ -3,9 +3,13 @@ import { List, ListItem, Image, Button, HStack } from "@chakra-ui/react";
 
 interface AgentsClassesProps {
   onSelectClass: (classe: string) => void;
+  selectedClass: string;
 }
 
-const AgentsClasses: React.FC<AgentsClassesProps> = ({ onSelectClass }) => {
+const AgentsClasses: React.FC<AgentsClassesProps> = ({
+  selectedClass,
+  onSelectClass,
+}) => {
   interface DefaultValues {
     imagePaths: {
       [key: string]: string;
@@ -35,7 +39,9 @@ const AgentsClasses: React.FC<AgentsClassesProps> = ({ onSelectClass }) => {
   };
 
   const handleClassClick = (classe: string) => {
-    onSelectClass(classe);
+    if (classe !== selectedClass) {
+      onSelectClass(classe);
+    }
   };
 
   return (
@@ -59,6 +65,8 @@ const AgentsClasses: React.FC<AgentsClassesProps> = ({ onSelectClass }) => {
               fontSize="md"
               whiteSpace="normal"
               textAlign="left"
+              fontWeight={key === selectedClass ? "bold" : "normal"}
+              textDecoration="none" // Remove underline here
             >
               {defaultValues.texts[key]}
             </Button>

@@ -23,7 +23,10 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <AgentsClasses onSelectClass={setSelectedClass} />
+          <AgentsClasses
+            selectedClass={selectedClass}
+            onSelectClass={setSelectedClass}
+          />
         </GridItem>
       </Show>
       <GridItem area="main">
